@@ -1,45 +1,25 @@
-def add(x, y):
-    return x + y
+import tkinter as tk
+from tkinter import messagebox
+import random
+import string
 
-def subtract(x, y):
-    return x - y
+def generate_password():
+    length = int(entry_length.get())
+    characters = string.ascii_letters + string.digits + string.punctuation
+    password = ''.join(random.choice(characters) for i in range(length))
+    messagebox.showinfo("Generated Password", f"Your password is: {password}")
 
-def multiply(x, y):
-    return x * y
+# Create the main window
+root = tk.Tk()
+root.title("Password Generator")
 
-def divide(x, y):
-    if y != 0:
-        return x / y
-    else:
-        return "Error: Cannot divide by zero"
+# Create GUI elements
+label_length = tk.Label(root, text="Password Length:")
+label_length.pack()
+entry_length = tk.Entry(root)
+entry_length.pack()
+button_generate = tk.Button(root, text="Generate Password", command=generate_password)
+button_generate.pack()
 
-print("Simple Calculator\n")
-
-# Get user input
-num1 = float(input("Enter the first number: "))
-num2 = float(input("Enter the second number: "))
-
-print("\nSelect operation:")
-print("1. Addition (+)")
-print("2. Subtraction (-)")
-print("3. Multiplication (*)")
-print("4. Division (/)")
-
-# Get operation choice from the user
-choice = input("Enter choice (1/2/3/4): ")
-
-# Perform calculation based on the user's choice
-if choice == '1':
-    result = add(num1, num2)
-    print(f"{num1} + {num2} = {result}")
-elif choice == '2':
-    result = subtract(num1, num2)
-    print(f"{num1} - {num2} = {result}")
-elif choice == '3':
-    result = multiply(num1, num2)
-    print(f"{num1} * {num2} = {result}")
-elif choice == '4':
-    result = divide(num1, num2)
-    print(f"{num1} / {num2} = {result}")
-else:
-    print("Invalid input. Please choose a valid operation.")
+# Run the Tkinter event loop
+root.mainloop()
